@@ -2,19 +2,25 @@ import { Button, Card, ListGroup, ListGroupItem } from "react-bootstrap";
 
 function Cart({ cart, setCart }) {
   const increaseQuantity = (id) => {
-    setCart(cart.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item));
+    setCart(
+      cart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
   };
 
   const decreaseQuantity = (id) => {
     setCart(
       cart
-        .map(item => item.id === id ? { ...item, quantity: item.quantity - 1 } : item)
-        .filter(item => item.quantity > 0) // Filtrar para eliminar pizzas con cantidad <= 0
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0) // Filtrar para eliminar pizzas con cantidad <= 0
     );
   };
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const pizzasInCart = cart.filter(pizza => pizza.quantity > 0);
+  const pizzasInCart = cart.filter((pizza) => pizza.quantity > 0);
 
   return (
     <div className="carrito-principal">
@@ -26,10 +32,15 @@ function Cart({ cart, setCart }) {
               <Card.Img />
               <Card.Body>
                 <Card.Title>
-                  Pizza {pizza.name.charAt(0).toUpperCase() + pizza.name.slice(1)}
+                  Pizza{" "}
+                  {pizza.name.charAt(0).toUpperCase() + pizza.name.slice(1)}
                 </Card.Title>
                 <p>
-                  Precio: {pizza.price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}
+                  Precio:{" "}
+                  {pizza.price.toLocaleString("es-CL", {
+                    style: "currency",
+                    currency: "CLP",
+                  })}
                 </p>
                 <ListGroup>
                   <ListGroupItem>
@@ -42,7 +53,9 @@ function Cart({ cart, setCart }) {
                         -
                       </Button>
                       <span>{pizza.quantity}</span>
-                      <Button onClick={() => increaseQuantity(pizza.id)}>+</Button>
+                      <Button onClick={() => increaseQuantity(pizza.id)}>
+                        +
+                      </Button>
                     </div>
                   </ListGroupItem>
                 </ListGroup>
@@ -53,7 +66,10 @@ function Cart({ cart, setCart }) {
       ) : (
         <p>Tu carrito está vacío.</p>
       )}
-      <h3>Total: {total.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</h3>
+      <h3>
+        Total:{" "}
+        {total.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}
+      </h3>git a
     </div>
   );
 }
